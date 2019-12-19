@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +29,16 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class Login_Fragment extends Fragment implements OnClickListener {
     private static View view;
@@ -157,8 +168,8 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     // Check Validation before login
     private void checkValidation() {
         // Get email id and password
-        String getEmailId = emailid.getText().toString();
-        String getPassword = password.getText().toString();
+        String getEmailId = emailid.getText().toString().trim();
+        String getPassword = password.getText().toString().trim();
 
         // Check patter for email id
         Pattern p = Pattern.compile(Utils.regEx);
@@ -178,9 +189,59 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             new CustomToast().Show_Toast(getActivity(), view,
                     "Your Email Id is Invalid.");
             // Else do login and do your stuff
-        else
-            Toast.makeText(getActivity(), "Do Login.", Toast.LENGTH_SHORT)
-                    .show();
 
+        else
+            {
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(LoginInterface.LOGINURL)
+                        .addConverterFactory(ScalarsConverterFactory.create())
+                        .build();
+
+                LoginInterface api = retrofit.create(LoginInterface.class);
+
+                Call<String> call = api.getUserLogin(getEmailId, getPassword);
+
+
+
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                Log.i("Responsestring", response.body().toString());
+                                Log.i("onSuccess", response.body().toString());
+
+                                String jsonresponse = response.body().toString();
+
+                                try {
+                                    JSONObject jsonObject = new JSONObject(jsonresponse);
+
+                                    if (jsonObject.getString("success").equals("true")) {
+                                        Toast.makeText(getActivity(), "Do Login Successfully!", Toast.LENGTH_SHORT)
+                                                .show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                        }else{
+                            loginLayout.startAnimation(shakeAnimation);
+                            new CustomToast().Show_Toast(getActivity(), view,
+                                    "Your Password is Invalid.");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast.makeText(getContext(),"Nothing \n"+t.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
+                // end else .
+             }
     }
 }

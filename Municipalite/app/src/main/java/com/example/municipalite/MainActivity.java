@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
                             Utils.Login_Fragment).commit();
         }
 
-        // On close icon click finish activity
-        findViewById(R.id.close_activity).setOnClickListener(
+        // On close icon click finish activity Button close app //////////////
+        /*findViewById(R.id.close_activity).setOnClickListener(
                 new OnClickListener() {
 
                     @Override
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                         finish();
 
                     }
-                });
+                });*/
 
     }
 

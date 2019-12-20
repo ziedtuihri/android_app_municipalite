@@ -5,10 +5,13 @@ import java.util.regex.Pattern;
 
 import com.example.municipalite.R;
 
+import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,10 +22,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
+
 public class SignUp_Fragment extends Fragment implements OnClickListener {
     private static View view;
     private static EditText fullName, emailId, mobileNumber, location,
-            password, confirmPassword;
+            password, confirmPassword, adress;
     private static TextView login;
     private static Button signUpButton;
     private static CheckBox terms_conditions;
@@ -51,9 +63,10 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         signUpButton = (Button) view.findViewById(R.id.signUpBtn);
         login = (TextView) view.findViewById(R.id.already_user);
         terms_conditions = (CheckBox) view.findViewById(R.id.terms_conditions);
+        adress = (EditText) view.findViewById(R.id.adress);
 
         // Setting text selector over textviews
-        XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
+        @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
         try {
             ColorStateList csl = ColorStateList.createFromXml(getResources(),
                     xrp);
@@ -98,6 +111,9 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         String getLocation = location.getText().toString();
         String getPassword = password.getText().toString();
         String getConfirmPassword = confirmPassword.getText().toString();
+        String getAdress = adress.getText().toString();
+        String cin="116521005";
+
 
         // Pattern match for email id
         Pattern p = Pattern.compile(Utils.regEx);
@@ -131,9 +147,61 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                     "Please select Terms and Conditions.");
 
             // Else do signup or do your stuff
-        else
+        else{
             Toast.makeText(getActivity(), "Do SignUp.", Toast.LENGTH_SHORT)
                     .show();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(RegisterInterface.REGIURL)
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .build();
+
+            RegisterInterface api = retrofit.create(RegisterInterface.class);
+
+            Call<String> call = api.getUserRegi(getFullName, getEmailId, getPassword, getConfirmPassword, getLocation, getAdress, getMobileNumber, cin);
+
+            call.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+
+                    if (response.isSuccessful()) {
+                        if (response.body() != null) {
+                            Log.i("Responsestring", response.body().toString());
+                            Log.i("onSuccess", response.body().toString());
+
+                            String jsonresponse = response.body().toString();
+
+                            try {
+                                JSONObject jsonObject = new JSONObject(jsonresponse);
+
+                                if (jsonObject.getString("success").equals("true")) {
+                                    Toast.makeText(getActivity(), "Do Login Successfully!", Toast.LENGTH_SHORT)
+                                            .show();
+                                }else{
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                    }else{
+                        new CustomToast().Show_Toast(getActivity(), view,
+                                "All fields are required.");
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(getContext(),"Nothing \n"+t.getMessage(),Toast.LENGTH_LONG).show();
+                }
+            });
+
+        //end else.
+        }
+
 
     }
 }

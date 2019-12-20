@@ -13,7 +13,13 @@ public interface RegisterInterface {
     @POST("register")
     Call<String> getUserRegi(
             @Field("name") String name,
-            @Field("hobby") String hobby
+            @Field("email") String email,
+            @Field("password") String password,
+            @Field("confirm_password") String confirm_password,
+            @Field("address") String address,
+            @Field("city") String city,
+            @Field("tel") String tel,
+            @Field("cin") String cin
     );
 
 }

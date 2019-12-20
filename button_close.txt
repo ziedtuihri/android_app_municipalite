@@ -1,0 +1,35 @@
+  <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_color" >
+
+        <ImageView
+            android:id="@+id/close_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="top|end"
+            android:layout_margin="1dp"
+            android:contentDescription="@string/closebutton"
+            android:padding="1dp"
+            android:src="@drawable/close" />
+
+        <FrameLayout
+            android:id="@+id/frameContainer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/close_activity" />
+    </RelativeLayout>
+
+MainActivity.java
+
+// On close icon click finish activity Button close app //////////////
+        /*findViewById(R.id.close_activity).setOnClickListener(
+                new OnClickListener() {
+
+                    @Override
+                    public void onClick(View arg0) {
+                        finish();
+
+                    }
+                });*/

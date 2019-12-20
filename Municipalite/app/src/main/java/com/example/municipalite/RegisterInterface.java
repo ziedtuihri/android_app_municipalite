@@ -8,7 +8,7 @@ import retrofit2.http.POST;
 
 public interface RegisterInterface {
 
-    String REGIURL = "http://196.229.46.157/municipalite2/public/api/";
+    String REGIURL = "http://196.234.19.88/municipalite2/public/api/";
     @FormUrlEncoded
     @POST("register")
     Call<String> getUserRegi(

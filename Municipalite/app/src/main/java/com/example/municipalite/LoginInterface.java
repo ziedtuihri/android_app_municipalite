@@ -7,7 +7,7 @@ import retrofit2.http.POST;
 
 public interface LoginInterface {
 
-        String LOGINURL = "http://196.229.46.157/municipalite2/public/api/";
+        String LOGINURL = "http://196.234.19.88/municipalite2/public/api/";
     @FormUrlEncoded
     @POST("login")
     Call<String> getUserLogin(

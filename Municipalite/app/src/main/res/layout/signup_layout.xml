@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="5dp"
+        android:padding="1dp"
         android:text="@string/signUp"
         android:textColor="@color/white_greyish"
         android:textSize="20sp"
@@ -19,7 +19,7 @@
         android:id="@+id/fullName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="1dp"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/user"
         android:drawablePadding="8dp"
@@ -41,7 +41,7 @@
         android:id="@+id/userEmailId"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="1dp"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/email"
         android:drawablePadding="8dp"
@@ -63,7 +63,7 @@
         android:id="@+id/mobileNumber"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="1dp"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/phone"
         android:drawablePadding="8dp"
@@ -151,7 +151,7 @@
         android:id="@+id/confirmPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/confirm_password"
         android:drawablePadding="8dp"
@@ -168,16 +168,16 @@
         android:id="@+id/terms_conditions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="1dp"
         android:text="@string/terms_conditions"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/signUpBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/loginbutton_selector"
         android:padding="3dp"
         android:text="@string/signUp"
@@ -195,6 +195,6 @@
         android:padding="10dp"
         android:text="@string/already_user"
         android:textColor="@color/white_greyish"
-        android:textSize="15sp" />
+        android:textSize="20sp" />
 
 </LinearLayout>

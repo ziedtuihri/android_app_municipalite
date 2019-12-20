@@ -72,7 +72,7 @@
                 android:layout_weight="1"
                 android:text="@string/show_pwd"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/forgot_password"
@@ -80,19 +80,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:padding="5dp"
+                android:padding="8dp"
                 android:text="@string/forgot"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <Button
             android:id="@+id/loginBtn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="1dp"
             android:background="@drawable/loginbutton_selector"
-            android:padding="3dp"
+            android:padding="5dp"
             android:text="@string/login"
             android:textColor="#009688"
             android:textSize="17sp"
@@ -107,9 +107,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:gravity="center"
-        android:padding="5dp"
+        android:padding="8dp"
         android:text="@string/newUser"
         android:textColor="@color/white"
-        android:textSize="15sp" />
+        android:textSize="20sp" />
 
 </RelativeLayout>

@@ -148,8 +148,6 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
             // Else do signup or do your stuff
         else{
-            Toast.makeText(getActivity(), "Do SignUp.", Toast.LENGTH_SHORT)
-                    .show();
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(RegisterInterface.REGIURL)
@@ -175,10 +173,11 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
                                 JSONObject jsonObject = new JSONObject(jsonresponse);
 
                                 if (jsonObject.getString("success").equals("true")) {
-                                    Toast.makeText(getActivity(), "Do Login Successfully!", Toast.LENGTH_SHORT)
+                                    Toast.makeText(getActivity(), "Do SignUp Successfully!", Toast.LENGTH_SHORT)
                                             .show();
-                                }else{
-
+                                }else if (jsonObject.getString("success").equals("false")){
+                                    new CustomToast().Show_Toast(getActivity(), view,
+                                            " "+jsonObject.getString("message"));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

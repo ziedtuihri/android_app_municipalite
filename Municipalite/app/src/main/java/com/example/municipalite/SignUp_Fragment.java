@@ -194,7 +194,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(getContext(),"Nothing \n"+t.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Server invalid \n"+t.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
 

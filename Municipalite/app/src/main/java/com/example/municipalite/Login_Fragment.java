@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import com.example.municipalite.R;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -220,6 +221,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                                     if (jsonObject.getString("success").equals("true")) {
                                         Toast.makeText(getActivity(), "Do Login Successfully!", Toast.LENGTH_SHORT)
                                                 .show();
+                                        Intent intent;
+                                        intent = new Intent(getActivity(), activity_list_events.class);
+                                        startActivity(intent);
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -236,7 +240,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(getContext(),"Nothing \n"+t.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"Server invalid \n"+t.getMessage(),Toast.LENGTH_LONG).show();
                     }
                 });
 
